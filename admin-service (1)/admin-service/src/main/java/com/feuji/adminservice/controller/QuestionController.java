@@ -30,10 +30,15 @@ public class QuestionController {
 		return questionService.getAllQuestions(sid);
 	}
 	
-	@PutMapping("/updatequestion/{sid}")
-	public ResponseEntity<String>updateQuestion(@RequestBody Question question,@PathVariable Long sid){
-		questionService.updatequestions(question,sid);
-		return new ResponseEntity<>("ok", HttpStatus.OK);
+	@PutMapping("/updatequestion")
+	public Question updateQuestion(@RequestBody Question question){
+		
+		return questionService.updatequestions(question);
+	}
+	@GetMapping("/getquestionbyid/{id}")
+	public Question getQuestionById(@PathVariable Long id) {
+		return questionService.getQuestionById(id);
+		
 	}
 	
 	

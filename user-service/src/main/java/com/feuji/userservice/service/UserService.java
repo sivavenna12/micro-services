@@ -11,19 +11,19 @@ public class UserService {
 	private UserRepository userRepository;
 
 	// register
-	public boolean createUser(User user) {
+	public User createUser(User user) {
 		if (user != null) {
 			User existUser = userRepository.findByEmail(user.getEmail());
 
 			if (existUser != null) {
-				throw new RuntimeException("User is alerdy register..");
+				return null;
 			} else {
-				userRepository.save(user);
-				return true;
+				
+				return userRepository.save(user);
 			}
 
 		} else {
-			return false;
+			return null;
 		}
 	}
 
@@ -35,7 +35,7 @@ public class UserService {
 		if (userinfo != null) {
 			return userinfo;
 		} else {
-			throw new RuntimeException("User Not Found!..");
+			return null;
 		}
 	}
 

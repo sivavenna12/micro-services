@@ -30,9 +30,9 @@ public class ExamService {
 	{
 		return examRepository.findById(id).get();
 	}
-	public Set<Exam> getAll()
+	public List<Exam> getAll()
 	{
-		return (Set<Exam>) examRepository.findAll();
+		return  examRepository.findAll();
 	}
 	public void updateExam(Exam exam,Long id) {
 		Exam exam1 = examRepository.findById(id).get();
