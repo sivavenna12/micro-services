@@ -38,5 +38,15 @@ public class UserService {
 			return null;
 		}
 	}
+	//update
+	public boolean editUser(User user) {
+		  User editUser=userRepository.findByEmail(user.getEmail());
+		  if(editUser!=null) {
+		 editUser.setPassword(user.getPassword());
+		 userRepository.saveAndFlush(editUser);
+		 return true;
+		  }
+		  return false;
+	  }
 
 }

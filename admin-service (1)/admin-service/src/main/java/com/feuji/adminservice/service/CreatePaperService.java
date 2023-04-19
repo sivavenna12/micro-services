@@ -52,5 +52,11 @@ public class CreatePaperService
 		createPaperRepository.saveAndFlush(paper);
 
 	}
+	public Set<Question> getPaperById(CreatePaper createPaper) {
+		Set<Question> set=new HashSet<>();
+		CreatePaper paper= createPaperRepository.findById(createPaper.getId()).get();
+		paper.getQuestions().stream().forEach(e->set.add(e));
+		return set;
+	}
 
 }

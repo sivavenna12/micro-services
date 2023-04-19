@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.feuji.commonmodel.Role;
 import com.feuji.commonmodel.User;
 import com.feuji.userservice.service.UserService;
 
@@ -19,12 +21,20 @@ public class UserController {
 
 	@PostMapping(value = "/registerUser")
 	public HttpStatus registerUser(@RequestBody User user) {
-		userService.createUser(user);
+		 if(user.getRole()==null) {
+		    	user.setRole(Role.USER);
+		    }
+		       userService.createUser(user);
 		return HttpStatus.OK;
 	}
 
 	@PostMapping(value = "/loginUser")
 	public User loginUser(@RequestBody User user) {
 		return userService.userLogin(user);
+	}
+	@PutMapping(value="/forgotpassword")
+	public void forgotPassword(@RequestBody User user ) {
+			
+	userService.editUser(user);
 	}
 }

@@ -1,6 +1,7 @@
 package com.feuji.adminservice.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.feuji.adminservice.service.CreatePaperService;
 import com.feuji.commonmodel.CreatePaper;
+import com.feuji.commonmodel.Question;
 
 @RestController
 @CrossOrigin("*")
@@ -42,4 +44,9 @@ public class CreatePaperController
 		createPaperService.updatePaper(createPaper,id);
 	}
 
+	@PostMapping("/questionsbypaper")
+	public Set<Question> getQuestionsByPaperId(@RequestBody CreatePaper createPaper) {
+		
+		return createPaperService.getPaperById(createPaper);
+	}
 }
