@@ -32,7 +32,6 @@ public class ExamController {
 	@GetMapping("/getallExams")
 	public List<Exam> getAllExams(){
 		return examService.getAll();
-		
 	}
 	
 	@GetMapping("/getquestions/{id}")
