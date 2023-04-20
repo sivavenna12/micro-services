@@ -16,11 +16,11 @@ public class ExamController {
 	@Autowired
 	private ExamService examService;
 	
-	@PostMapping("/addexam")
-	public ResponseEntity<String> addexam(@RequestBody Exam exam)
+	@PostMapping("/addexam/{pid}")
+	public HttpStatus addexam(@RequestBody Exam exam,@PathVariable Long pid)
 	{
-		examService.addExam(exam);
-		return new ResponseEntity<>("ok", HttpStatus.OK);
+		examService.addExam(exam,pid);
+		return HttpStatus.OK;
 	}
 	
 	@PutMapping("/updateexam/{id}")
@@ -29,7 +29,7 @@ public class ExamController {
 		examService.updateExam(exam,id);
 	}
 	
-	@GetMapping("/getallExams")
+	@GetMapping("/getallexams")
 	public List<Exam> getAllExams(){
 		return examService.getAll();
 	}

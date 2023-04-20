@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.feuji.adminservice.repo.CreatePaperRepository;
 import com.feuji.adminservice.repo.ExamRepository;
 import com.feuji.adminservice.repo.QuestionRepository;
+import com.feuji.commonmodel.CreatePaper;
 import com.feuji.commonmodel.Exam;
 import com.feuji.commonmodel.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,13 @@ public class ExamService {
 	@Autowired
 	private QuestionRepository questionRepository;
 	
-	public void addExam(Exam exam)
+	@Autowired
+	private CreatePaperRepository createPaperRepository;
+	
+	public void addExam(Exam exam,Long id)
 	{
-		
+		CreatePaper createPaper= createPaperRepository.findById(id).get();
+		//exam.setCreatePaper(createPaper);
 		examRepository.save(exam);
 	}
 	
