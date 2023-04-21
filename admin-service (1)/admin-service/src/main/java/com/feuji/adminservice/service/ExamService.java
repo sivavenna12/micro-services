@@ -28,7 +28,10 @@ public class ExamService {
 	public void addExam(Exam exam,Long id)
 	{
 		CreatePaper createPaper= createPaperRepository.findById(id).get();
-		//exam.setCreatePaper(createPaper);
+
+		exam.setCreatePaper(createPaper);
+	
+
 		examRepository.save(exam);
 	}
 	
