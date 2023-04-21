@@ -10,6 +10,8 @@ import com.feuji.adminservice.repo.QuestionRepository;
 import com.feuji.commonmodel.CreatePaper;
 import com.feuji.commonmodel.Exam;
 import com.feuji.commonmodel.Question;
+import com.feuji.commonmodel.Subject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,10 @@ public class ExamService {
 	{
 		CreatePaper createPaper= createPaperRepository.findById(id).get();
 
+
 		exam.setCreatePaper(createPaper);
 	
+
 
 		examRepository.save(exam);
 	}
@@ -55,6 +59,14 @@ public class ExamService {
 		examRepository.saveAndFlush(exam1);
 
 	}
+	public Set<Question> getQuestionsByCode(String code){
+		Exam exam=examRepository.findByCode(code);
+		System.out.println(code);
+		Set<Question> questionsList= exam.getCreatePaper().getQuestions();
+		return questionsList;
+	}
+
+	
 	
 
 

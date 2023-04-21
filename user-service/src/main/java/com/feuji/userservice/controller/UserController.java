@@ -37,4 +37,8 @@ public class UserController {
 			
 	userService.editUser(user);
 	}
+	@PostMapping(value = "/getUserById")
+	public User getUserById(@RequestBody User user) {
+		return userService.getUserById(user);	
+	}
 }

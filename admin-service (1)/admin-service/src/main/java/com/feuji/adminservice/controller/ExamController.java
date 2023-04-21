@@ -2,6 +2,8 @@ package com.feuji.adminservice.controller;
 
 import com.feuji.adminservice.service.ExamService;
 import com.feuji.commonmodel.Exam;
+import com.feuji.commonmodel.Question;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +40,11 @@ public class ExamController {
 	public  Exam get(@PathVariable Long id)
 	{
 		return  examService.getbyId(id);
+	}
+	@PostMapping("/getquestionsBycode/{code}")
+	public Set<Question> getQuestionsByCode(@PathVariable String code){
+		System.out.println(code);
+		return examService.getQuestionsByCode(code);
+		
 	}
 }
