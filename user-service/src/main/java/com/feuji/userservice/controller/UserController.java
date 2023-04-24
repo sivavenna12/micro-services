@@ -20,12 +20,12 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping(value = "/registerUser")
-	public HttpStatus registerUser(@RequestBody User user) {
+	public User registerUser(@RequestBody User user) {
 		 if(user.getRole()==null) {
 		    	user.setRole(Role.USER);
 		    }
-		       userService.createUser(user);
-		return HttpStatus.OK;
+		       
+		return userService.createUser(user);
 	}
 
 	@PostMapping(value = "/loginUser")

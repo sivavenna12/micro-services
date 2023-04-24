@@ -3,6 +3,7 @@ package com.feuji.adminservice.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.feuji.adminservice.repo.CreatePaperRepository;
 import com.feuji.adminservice.repo.ExamRepository;
@@ -59,13 +60,17 @@ public class ExamService {
 		examRepository.saveAndFlush(exam1);
 
 	}
-	public Set<Question> getQuestionsByCode(String code){
+	public Set<Subject> getSubjectsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
 		System.out.println(code);
-		Set<Question> questionsList= exam.getCreatePaper().getQuestions();
-		return questionsList;
+		 
+		return exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet());
 	}
-
+	public Set<Question> getQuestionsBySubjectId(Long sid,String code){
+		Exam exam=examRepository.findByCode(code);
+		System.out.println(code);
+		return 	exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet());
+	}
 	
 	
 

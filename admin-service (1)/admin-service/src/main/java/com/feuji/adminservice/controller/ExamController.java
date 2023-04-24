@@ -3,6 +3,7 @@ package com.feuji.adminservice.controller;
 import com.feuji.adminservice.service.ExamService;
 import com.feuji.commonmodel.Exam;
 import com.feuji.commonmodel.Question;
+import com.feuji.commonmodel.Subject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,10 +42,16 @@ public class ExamController {
 	{
 		return  examService.getbyId(id);
 	}
-	@PostMapping("/getquestionsBycode/{code}")
-	public Set<Question> getQuestionsByCode(@PathVariable String code){
+	@PostMapping("/getsubjectsBycode/{code}")
+	public Set<Subject> getSubjectsByCode(@PathVariable String code){
 		System.out.println(code);
-		return examService.getQuestionsByCode(code);
+		return examService.getSubjectsByCode(code);
+		
+	}
+	@GetMapping("/getquestionsBySubjectId/{sid}/{code}")
+	public Set<Question> getQuestionsBySubjectId(@PathVariable Long sid ,@PathVariable String code){
+		System.out.println(code);
+		return examService.getQuestionsBySubjectId(sid,code);
 		
 	}
 }
