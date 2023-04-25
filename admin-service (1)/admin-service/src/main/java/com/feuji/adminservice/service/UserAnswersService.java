@@ -69,4 +69,11 @@ private RestTemplate restTemplate;
 		
 		return userAnswersRepository.findAllByUserId(uid);
 	}
+	
+	public List<UserAnswers> getanswers(Long uid,Long eid)
+	{
+		
+		return userAnswersRepository.findAllByUserIdAndExamId(uid,eid);
+	}
+
 }

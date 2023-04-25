@@ -15,5 +15,7 @@ public UserAnswers findByUserAndExamAndQuestion(User user,Exam exam,Question que
 	
 List<UserAnswers> findAllByUserId(Long userId);
 
+List<UserAnswers> findAllByUserIdAndExamId(Long uid,Long eid);
+
 
 }
