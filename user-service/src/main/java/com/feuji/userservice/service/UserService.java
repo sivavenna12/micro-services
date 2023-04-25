@@ -49,8 +49,13 @@ public class UserService {
 		  return false;
 	  }
 	//get by id
-		public User getUserById(User user) {
-			return userRepository.findById(user.getId()).get();
-		}
+	public User getUserById(long id) {
+		
+		return userRepository.findById(id).get();
+	}
+    public User getUser(User user) {
+		
+		return userRepository.findById(user.getId()).get();
+	}
 
 }

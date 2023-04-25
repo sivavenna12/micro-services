@@ -24,8 +24,10 @@ public class UserAnswersController {
 	@PostMapping("/saveanswer")
 	public HttpStatus addPaper(@RequestBody UserAnswers userAnswers)
 	{
-		
-		userAnswersService.saveAnswer(userAnswers);
+		Long eid=userAnswers.getExam().getId();
+		Long qid=userAnswers.getQuestion().getId();
+		Long uid=userAnswers.getUser().getId();
+		userAnswersService.saveAnswer(userAnswers,eid,qid,uid);
 		return HttpStatus.OK;
 	}
 	

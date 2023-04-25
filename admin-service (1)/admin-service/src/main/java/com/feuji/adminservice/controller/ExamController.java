@@ -55,4 +55,11 @@ public class ExamController {
 		return examService.getQuestionsBySubjectId(sid,code);
 		
 	}
+	@GetMapping("/getquestionsBySubjectId/{code}")
+	public Set<Question> getAllQuestionsByCode(@PathVariable String code){
+		System.out.println(code);
+		return examService.getAllQuestionsByCode(code);
+		
+	}
+	
 }
