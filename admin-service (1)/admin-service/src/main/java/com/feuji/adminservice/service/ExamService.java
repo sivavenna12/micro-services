@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import com.feuji.adminservice.repo.CreatePaperRepository;
 import com.feuji.adminservice.repo.ExamRepository;
 import com.feuji.adminservice.repo.QuestionRepository;
@@ -31,16 +30,12 @@ public class ExamService {
 	public void addExam(Exam exam,Long id)
 	{
 		CreatePaper createPaper= createPaperRepository.findById(id).get();
-
-
 		exam.setCreatePaper(createPaper);
 	
-
-
 		examRepository.save(exam);
 	}
 	
-	public Exam getbyId(long id)
+	public Exam getbySid(long id)
 	{
 		return examRepository.findById(id).get();
 	}
@@ -66,12 +61,13 @@ public class ExamService {
 		 
 		return exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet());
 	}
+
 	public Set<Question> getQuestionsBySubjectId(Long sid,String code){
 		Exam exam=examRepository.findByCode(code);
 		System.out.println(code);
+	
 		return 	exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet());
 	}
-	
 	
 
 

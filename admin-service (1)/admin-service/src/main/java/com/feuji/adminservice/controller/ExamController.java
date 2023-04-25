@@ -37,10 +37,10 @@ public class ExamController {
 		return examService.getAll();
 	}
 	
-	@GetMapping("/getquestions/{id}")
-	public  Exam get(@PathVariable Long id)
+	@GetMapping("/getquestions/{sid}")
+	public  Exam get(@PathVariable Long sid)
 	{
-		return  examService.getbyId(id);
+		return  examService.getbySid(sid);
 	}
 	@PostMapping("/getsubjectsBycode/{code}")
 	public Set<Subject> getSubjectsByCode(@PathVariable String code){
@@ -48,6 +48,7 @@ public class ExamController {
 		return examService.getSubjectsByCode(code);
 		
 	}
+	
 	@GetMapping("/getquestionsBySubjectId/{sid}/{code}")
 	public Set<Question> getQuestionsBySubjectId(@PathVariable Long sid ,@PathVariable String code){
 		System.out.println(code);

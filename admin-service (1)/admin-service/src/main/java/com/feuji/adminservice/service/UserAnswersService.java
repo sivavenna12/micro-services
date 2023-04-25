@@ -24,4 +24,10 @@ public class UserAnswersService {
 		
 		return userAnswersRepository.findAll();
 	}
+	
+	public List<UserAnswers> getUserAnswers(Long uid)
+	{
+		
+		return userAnswersRepository.findAllByUserId(uid);
+	}
 }
