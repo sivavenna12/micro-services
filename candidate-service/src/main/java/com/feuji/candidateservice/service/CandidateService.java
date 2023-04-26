@@ -34,13 +34,13 @@ public class CandidateService {
 	public Long getuserScore(Long uid,Long eid)
 	{
 		Long score=(long) 0;
-		UserAnswers[] userAnswers =restTemplate.getForObject("/getanswers/{uid}",UserAnswers[].class,uid);
+		UserAnswers[] userAnswers =restTemplate.getForObject("/getUserAnswers/{uid}/{eid}",UserAnswers[].class,uid,eid);
 		
 		for(UserAnswers answers:userAnswers) 
 		{
 			//answers.getExam().getCreatePaper().getQuestions().stream().forEach((q)->{correctAnswer=q.getAnswer();});
 			
-			if(answers.getUserAnswer().equals(answers.getQuestion().getAnswer()) && answers.getExam().getId()==eid)
+			if(answers.getUserAnswer().equals(answers.getQuestion().getAnswer()))
 			{
 				score++;
 			}

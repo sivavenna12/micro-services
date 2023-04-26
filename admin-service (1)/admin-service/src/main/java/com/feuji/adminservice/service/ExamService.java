@@ -73,6 +73,12 @@ public class ExamService {
 		System.out.println(code);
 		return 	exam.getCreatePaper().getQuestions();
 	}
+
+	public Exam getExamById(Long id) 
+	{
+		
+		return examRepository.findById(id).get();
+	}
 	
 
 

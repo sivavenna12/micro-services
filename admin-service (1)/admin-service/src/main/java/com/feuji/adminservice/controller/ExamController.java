@@ -62,4 +62,10 @@ public class ExamController {
 		
 	}
 	
+	@GetMapping("/getexam/{id}")
+	public Exam getExam(@PathVariable Long id)
+	{
+		return examService.getExamById(id);
+	}
+	
 }
