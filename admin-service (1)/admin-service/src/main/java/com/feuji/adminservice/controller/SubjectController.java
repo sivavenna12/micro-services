@@ -26,11 +26,11 @@ public class SubjectController {
 	}
 
 	@PutMapping("/updatesubject/{id}")
-	public ResponseEntity<String> updateSubject( @PathVariable Long id, @RequestBody Subject subject)
+	public HttpStatus updateSubject( @PathVariable Long id, @RequestBody Subject subject)
 	{
 		subjectService.updateSubject(subject, id);
 		System.out.println(subject.getName()+"  "+subject.getDescription());
-		return new ResponseEntity<>("ok", HttpStatus.OK);
+		return HttpStatus.OK;
 	}
 	
 	@GetMapping("/getAllSubjects")
