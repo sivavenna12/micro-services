@@ -41,8 +41,10 @@ public class SubjectController {
 		list.stream().forEach((s)->System.out.println(s.getId()+"============"));
 		return list;
 	}
-
-	
+	@GetMapping("/getSubjectById/{id}")
+	public Subject getSubjectById(@PathVariable Long id) {
+		return subjectService.getSubjectById(id);
+	}
 
 	
 

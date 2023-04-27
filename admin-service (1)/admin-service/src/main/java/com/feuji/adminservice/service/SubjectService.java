@@ -31,7 +31,10 @@ public class SubjectService {
     	subject1.setDescription(subject.getDescription());
 		subjectRepository.saveAndFlush(subject1);
 	}
-	
+	public Subject getSubjectById(Long id) {
+		return subjectRepository.findById(id).get();
+		
+	}
 	
 	
 
