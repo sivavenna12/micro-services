@@ -44,5 +44,9 @@ public class QuestionService {
 
 		return questionRepository.findById(id).get();
 	}
+	public void deleteQuestionById(Long id) {
+
+		 questionRepository.deleteById(id);;
+	}
 
 }
