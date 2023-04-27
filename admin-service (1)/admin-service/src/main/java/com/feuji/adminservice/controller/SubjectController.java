@@ -45,6 +45,11 @@ public class SubjectController {
 	public Subject getSubjectById(@PathVariable Long id) {
 		return subjectService.getSubjectById(id);
 	}
+	@DeleteMapping("/deleteSubject/{id}")
+	public HttpStatus deleteSubject(@PathVariable Long id) {
+		 subjectService.deleteSubject(id);;
+		return HttpStatus.OK;
+	}
 
 	
 

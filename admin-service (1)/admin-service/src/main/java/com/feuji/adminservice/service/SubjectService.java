@@ -35,6 +35,9 @@ public class SubjectService {
 		return subjectRepository.findById(id).get();
 		
 	}
+	public void deleteSubject(Long id) {
+		subjectRepository.deleteById(id);
+	}
 	
 	
 
