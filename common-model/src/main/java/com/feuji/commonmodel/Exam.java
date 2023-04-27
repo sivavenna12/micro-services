@@ -26,8 +26,8 @@ public class Exam {
     private CreatePaper createPaper;
 
 
-    @OneToOne(mappedBy = "exam", cascade = CascadeType.ALL)
-    private Marks marks;
+//    @OneToOne(mappedBy = "exam", cascade = CascadeType.ALL)
+//    private Marks marks;
     
     private int examDuration;
     public Exam() {
