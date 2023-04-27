@@ -32,6 +32,7 @@ public class CreatePaperController
 		return HttpStatus.OK;
 	}
 	
+	
 	@GetMapping("/getpaper")
 	public List<CreatePaper> getPaper()
 	{

@@ -2,9 +2,11 @@ package com.feuji.commonmodel;
 
 import jakarta.persistence.*;
 
+import java.sql.Blob;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "create_paper")
@@ -21,6 +23,11 @@ public class CreatePaper {
 
 	@Transient
 	private Long[] questionsListArray;
+	
+	@Transient
+	private Long[] codingQuestionsListArray;
+	
+	
  	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "exams_questions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
@@ -90,5 +97,23 @@ public class CreatePaper {
 	public void setQuestionsListArray(Long[] questionsListArray) {
 		this.questionsListArray = questionsListArray;
 	}
+
+	public Long[] getCodingQuestionsListArray() {
+		return codingQuestionsListArray;
+	}
+
+	public void setCodingQuestionsListArray(Long[] codingQuestionsListArray) {
+		this.codingQuestionsListArray = codingQuestionsListArray;
+	}
+
+	public Set<CodingQuestion> getCodingQuestions() {
+		return codingQuestions;
+	}
+
+	public void setCodingQuestions(Set<CodingQuestion> codingQuestions) {
+		this.codingQuestions = codingQuestions;
+	}
+	
+	
 
 }
