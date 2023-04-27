@@ -26,6 +26,11 @@ public class CreatePaper {
 	@JoinTable(name = "exams_questions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
 	private Set<Question> questions;
 
+ 	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "paper_codingQuestions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "codingQuestion_id"))
+	private Set<CodingQuestion> codingQuestions;
+ 	
 //	@OneToOne(cascade = CascadeType.ALL, mappedBy = "createPaper")
 //	private Exam exam;
 
