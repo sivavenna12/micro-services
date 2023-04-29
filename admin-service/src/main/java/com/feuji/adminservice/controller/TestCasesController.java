@@ -23,8 +23,8 @@ public class TestCasesController
 	private TestCasesServices testCasesServices;
 	
 	@PostMapping("/addtestcases/{qid}")
-	public HttpStatus insertQuestion(@RequestBody TestCases testCases, @PathVariable Long qid) {
-		testCasesServices.addTestCases(testCases,qid);
+	public HttpStatus insertQuestion(@RequestBody List<TestCases> testCasesList, @PathVariable Long qid) {
+		testCasesServices.addTestCases(testCasesList,qid);
 		return HttpStatus.OK;
 	}
 	
