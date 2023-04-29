@@ -1,6 +1,6 @@
 package com.feuji.adminservice.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class CodingQuestionService
 		codingQuestionRepository.save(codingQuestion);
 	}
 	
-	public Set<CodingQuestion> getAllQuestions(Long id) {
-		Set<CodingQuestion> set = codingQuestionRepository.findBySubjectId(id);
+	public List<CodingQuestion> getAllQuestions() {
+		List<CodingQuestion> set =  codingQuestionRepository.findAll();
 		return set;
 	}
 

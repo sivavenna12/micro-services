@@ -52,7 +52,6 @@ public class CreatePaperService
 				codingQuestionsSet.add(codingQuestion);
 			});
 			createPaper.setCodingQuestions(codingQuestionsSet);
-			
 		}
 		
 		createPaperRepository.save(createPaper);

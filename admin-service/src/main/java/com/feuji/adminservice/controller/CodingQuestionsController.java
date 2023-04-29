@@ -1,6 +1,6 @@
 package com.feuji.adminservice.controller;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +27,9 @@ public class CodingQuestionsController {
 		return HttpStatus.OK;
 	}
 	
-	@GetMapping("/getallcodingquestions/{sid}")
-	public Set<CodingQuestion> getAllQuestions(@PathVariable Long sid)
+	@GetMapping("/fetchcodingquestions")
+	public List<CodingQuestion> getAllQuestions()
 	{
-		
-		return codingQuestionService.getAllQuestions(sid);
+		return codingQuestionService.getAllQuestions();
 	}
 }
