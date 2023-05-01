@@ -50,13 +50,13 @@ public class ExamController {
 	}
 	
 	@GetMapping("/getquestionsBySubjectId/{sid}/{code}")
-	public Set<Question> getQuestionsBySubjectId(@PathVariable Long sid ,@PathVariable String code){
+	public Set getQuestionsBySubjectId(@PathVariable Long sid ,@PathVariable String code){
 		System.out.println(code);
 		return examService.getQuestionsBySubjectId(sid,code);
 		
 	}
 	@GetMapping("/getquestionsBySubjectId/{code}")
-	public Set<Question> getAllQuestionsByCode(@PathVariable String code){
+	public Set getAllQuestionsByCode(@PathVariable String code){
 		System.out.println(code);
 		return examService.getAllQuestionsByCode(code);
 		
@@ -66,6 +66,17 @@ public class ExamController {
 	public Exam getExam(@PathVariable Long id)
 	{
 		return examService.getExamById(id);
+	}
+	
+	@DeleteMapping("/deleteExam/{id}")
+	public HttpStatus deleteexam(@PathVariable Long id) {
+		examService.deletebyid(id);
+		return HttpStatus.OK;
+	}
+	@DeleteMapping("/deleteExamWithPaper/{eid}/{pid}")
+	public HttpStatus deleteexamwithpaper(@PathVariable Long eid,@PathVariable Long pid) {
+		examService.deleteexamwithpaper(eid,pid);
+		return HttpStatus.OK;
 	}
 	
 }

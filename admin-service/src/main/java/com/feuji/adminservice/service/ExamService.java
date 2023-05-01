@@ -57,21 +57,29 @@ public class ExamService {
 	}
 	public Set<Subject> getSubjectsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
-		System.out.println(code);
-		 
-		return exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet());
+		
+		Set<Subject> set=new HashSet<>();
+		set.addAll(exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
+		return set;
 	}
 
-	public Set<Question> getQuestionsBySubjectId(Long sid,String code){
+	public Set getQuestionsBySubjectId(Long sid,String code){
 		Exam exam=examRepository.findByCode(code);
-		System.out.println(code);
-	
-		return 	exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet());
+		
+		Set set=new HashSet();
+		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
+		
+		return 	set;
 	}
-	public Set<Question> getAllQuestionsByCode(String code){
+	public Set getAllQuestionsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
-		System.out.println(code);
-		return 	exam.getCreatePaper().getQuestions();
+		
+		Set set=new HashSet();
+		set.addAll(exam.getCreatePaper().getQuestions());
+		set.addAll(exam.getCreatePaper().getCodingQuestions());
+		return 	set;
 	}
 
 	public Exam getExamById(Long id) 
@@ -80,6 +88,19 @@ public class ExamService {
 		return examRepository.findById(id).get();
 	}
 	
+	public void deletebyid(Long id)
+	{
+		Exam exam=examRepository.findById(id).get();
+		exam.setCreatePaper(null);
+		examRepository.deleteById(id);
+	}
+	public void deleteexamwithpaper(Long eid,Long pid)
+	{
+		Exam exam=examRepository.findById(eid).get();
+		exam.setCreatePaper(null);
+		examRepository.deleteById(eid);
+		createPaperRepository.deleteById(pid);
+	}
 
 
 }

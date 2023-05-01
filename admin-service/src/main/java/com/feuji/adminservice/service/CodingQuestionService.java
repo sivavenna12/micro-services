@@ -30,5 +30,10 @@ public class CodingQuestionService
 		List<CodingQuestion> set =  codingQuestionRepository.findAll();
 		return set;
 	}
+	
+	public List<CodingQuestion> getAllCodingQuestions(Long sid) {
+		List<CodingQuestion> set =  codingQuestionRepository.findBySubjectId(sid);
+		return set;
+	}
 
 }

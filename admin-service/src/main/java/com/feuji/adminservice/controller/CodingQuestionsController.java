@@ -27,9 +27,16 @@ public class CodingQuestionsController {
 		return HttpStatus.OK;
 	}
 	
+	
 	@GetMapping("/fetchcodingquestions")
 	public List<CodingQuestion> getAllQuestions()
 	{
 		return codingQuestionService.getAllQuestions();
+	}
+	
+	@GetMapping("/getallcodingquestions/{sid}")
+	public List<CodingQuestion> getAllCodingQuestions(@PathVariable Long sid)
+	{
+		return codingQuestionService.getAllCodingQuestions(sid);
 	}
 }

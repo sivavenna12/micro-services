@@ -81,5 +81,10 @@ public class CreatePaperService
 		paper.getQuestions().stream().forEach(e->set.add(e));
 		return set;
 	}
+	
+	public void deletebyid(Long id)
+	{
+		createPaperRepository.deleteById(id);
+	}
 
 }
