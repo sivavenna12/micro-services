@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,10 +76,21 @@ public class CreatePaperService
 		createPaperRepository.saveAndFlush(paper);
 
 	}
-	public Set<Question> getPaperById(CreatePaper createPaper) {
-		Set<Question> set=new HashSet<>();
+	
+	public Set<Subject> getSubjectsByPaperId(Long pid)
+	{
+		CreatePaper paper= createPaperRepository.findById(pid).get();
+		Set<Subject> set=new HashSet<>();
+		set.addAll(paper.getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(paper.getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
+		return set;
+	}
+	
+	public Set getPaperById(CreatePaper createPaper) {
+		Set set=new HashSet<>();
 		CreatePaper paper= createPaperRepository.findById(createPaper.getId()).get();
 		paper.getQuestions().stream().forEach(e->set.add(e));
+		paper.getCodingQuestions().stream().forEach(e->set.add(e));
 		return set;
 	}
 	

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.feuji.adminservice.service.CreatePaperService;
 import com.feuji.commonmodel.CreatePaper;
 import com.feuji.commonmodel.Question;
+import com.feuji.commonmodel.Subject;
 
 @RestController
 @CrossOrigin("*")
@@ -45,9 +46,16 @@ public class CreatePaperController
 	{
 		createPaperService.updatePaper(createPaper,id);
 	}
+	
+	@GetMapping("/subjectsbypaper/{pId}")
+	public Set<Subject> getSubjectsByPaperId(@PathVariable Long pId)
+	{
+		
+		return createPaperService.getSubjectsByPaperId(pId);
+	}
 
 	@PostMapping("/questionsbypaper")
-	public Set<Question> getQuestionsByPaperId(@RequestBody CreatePaper createPaper) {
+	public Set getQuestionsByPaperId(@RequestBody CreatePaper createPaper) {
 		
 		return createPaperService.getPaperById(createPaper);
 	}
