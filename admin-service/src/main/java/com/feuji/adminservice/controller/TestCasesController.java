@@ -21,13 +21,18 @@ public class TestCasesController
 {
 	@Autowired
 	private TestCasesServices testCasesServices;
-	
+//	
+//	@PostMapping("/addtestcases/{qid}")
+//	public HttpStatus insertQuestion(@RequestBody List<TestCases> testCasesList, @PathVariable Long qid) {
+//		testCasesServices.addTestCases(testCasesList,qid);
+//		return HttpStatus.OK;
+//	}
+
 	@PostMapping("/addtestcases/{qid}")
-	public HttpStatus insertQuestion(@RequestBody List<TestCases> testCasesList, @PathVariable Long qid) {
-		testCasesServices.addTestCases(testCasesList,qid);
+	public HttpStatus insertQuestion(@RequestBody TestCases testCases, @PathVariable Long qid) {
+		testCasesServices.addTestCases(testCases,qid);
 		return HttpStatus.OK;
 	}
-	
 	@GetMapping("/getalltestcases/{qid}")
 	public List<TestCases> getAllQuestions(@PathVariable Long qid)
 	{
