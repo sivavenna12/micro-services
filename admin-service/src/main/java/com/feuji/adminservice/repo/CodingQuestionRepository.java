@@ -11,4 +11,6 @@ import com.feuji.commonmodel.Question;
 public interface CodingQuestionRepository extends JpaRepository<CodingQuestion, Long> {
 
 	public  List<CodingQuestion> findBySubjectId(Long subjectId);
+	
+	public List<CodingQuestion> findByStatus(String status);
 }

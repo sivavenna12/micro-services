@@ -21,6 +21,8 @@ public class CodingQuestion
 	@Column(name = "content",nullable = false)
 	private String content;
 	
+	private String status;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "subject_Id", nullable = false)
 	private Subject subject;
@@ -35,6 +37,14 @@ public class CodingQuestion
 		this.id = id;
 		this.content = content;
 		this.subject = subject;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Long getId() {

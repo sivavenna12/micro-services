@@ -26,6 +26,8 @@ public class TestCases
 	@Column(name = "expectedOutput", nullable = false)
 	private String expectedOutput;
 	
+	private String status;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codingQuestion_Id", nullable = false)
 	private CodingQuestion codingQuestion;
@@ -41,6 +43,14 @@ public class TestCases
 		this.input = input;
 		this.expectedOutput = expectedOutput;
 		this.codingQuestion = codingQuestion;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Long getId() {

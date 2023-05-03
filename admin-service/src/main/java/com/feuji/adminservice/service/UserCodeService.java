@@ -67,8 +67,11 @@ public class UserCodeService
 	}
 	public List<UserCode> getAnswers()
 	{
-		
-		return userCodeRepository.findAll();
+		List<UserCode> list=userCodeRepository.findAll();
+		list.stream().forEach((userCode)->{
+			userCode.setUserInputCode(new String(userCode.getCode()));
+		});
+		return list;
 	}
 	
 //	public List<UserAnswers> getUserAnswers(Long uid)

@@ -31,6 +31,7 @@ public class CreatePaperService
 	
 	public void addPaper(CreatePaper createPaper)
 	{
+		createPaper.setStatus("active");
 
 		Set<Question> questionsSet=new HashSet<>();
 		
@@ -62,7 +63,7 @@ public class CreatePaperService
 	
 	public List<CreatePaper> getPaper()
 	{
-		return createPaperRepository.findAll();
+		return createPaperRepository.findByStatus("active");
 	}
 	
 	public void updatePaper(CreatePaper createPaper,Long id) 
@@ -81,22 +82,24 @@ public class CreatePaperService
 	{
 		CreatePaper paper= createPaperRepository.findById(pid).get();
 		Set<Subject> set=new HashSet<>();
-		set.addAll(paper.getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(paper.getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
+		set.addAll(paper.getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(paper.getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet()));
 		return set;
 	}
 	
 	public Set getPaperById(CreatePaper createPaper) {
 		Set set=new HashSet<>();
 		CreatePaper paper= createPaperRepository.findById(createPaper.getId()).get();
-		paper.getQuestions().stream().forEach(e->set.add(e));
-		paper.getCodingQuestions().stream().forEach(e->set.add(e));
+		paper.getQuestions().stream().map((q)->q.getSubject()).filter((q)->q.getStatus().equalsIgnoreCase("active")).forEach(e->set.add(e));
+		paper.getCodingQuestions().stream().map((q)->q.getSubject()).filter((q)->q.getStatus().equalsIgnoreCase("active")).forEach(e->set.add(e));
 		return set;
 	}
 	
 	public void deletebyid(Long id)
 	{
-		createPaperRepository.deleteById(id);
+		CreatePaper paper= createPaperRepository.findById(id).get();
+		paper.setStatus("inactive");
+		createPaperRepository.saveAndFlush(paper);
 	}
 
 }

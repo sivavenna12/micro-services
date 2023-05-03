@@ -20,6 +20,8 @@ public class CreatePaper {
 	private int totalMarks;
 
 	private int numberOfQuestions;
+	
+	private String status;
 
 	@Transient
 	private Long[] questionsListArray;
@@ -40,6 +42,14 @@ public class CreatePaper {
  	
 //	@OneToOne(cascade = CascadeType.ALL, mappedBy = "createPaper")
 //	private Exam exam;
+ 	
+ 	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Long getId() {
 		return id;

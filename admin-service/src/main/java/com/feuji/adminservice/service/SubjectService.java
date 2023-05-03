@@ -17,12 +17,13 @@ public class SubjectService {
 	public void addSubject(Subject subject)
 	{
 		System.out.println(subject.getName()+"  "+subject.getDescription());
+		subject.setStatus("active");
 
 		subjectRepository.save(subject);
 	}
 	
 	public List<Subject> getAll() {
-		return subjectRepository.findAll();
+		return subjectRepository.findByStatus("active");
 	}
 	
 	public void updateSubject(Subject subject,Long id) {
@@ -36,7 +37,10 @@ public class SubjectService {
 		
 	}
 	public void deleteSubject(Long id) {
-		subjectRepository.deleteById(id);
+		Subject subject1=subjectRepository.findById(id).get();
+		subject1.setStatus("inactive");
+		subjectRepository.saveAndFlush(subject1);
+		
 	}
 	
 	

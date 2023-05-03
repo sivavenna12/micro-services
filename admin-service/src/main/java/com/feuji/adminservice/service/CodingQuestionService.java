@@ -23,11 +23,12 @@ public class CodingQuestionService
 		
 		Subject subject = subjectRepository.findById(sid).get();
 		codingQuestion.setSubject(subject);
+		codingQuestion.setStatus("active");
 		codingQuestionRepository.save(codingQuestion);
 	}
 	
 	public List<CodingQuestion> getAllQuestions() {
-		List<CodingQuestion> set =  codingQuestionRepository.findAll();
+		List<CodingQuestion> set =  codingQuestionRepository.findByStatus("active");
 		return set;
 	}
 	

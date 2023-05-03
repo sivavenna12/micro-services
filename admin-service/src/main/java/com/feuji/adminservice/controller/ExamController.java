@@ -37,6 +37,11 @@ public class ExamController {
 		return examService.getAll();
 	}
 	
+	@GetMapping("/getexambycode/{code}")
+	public Exam getExamByCode(@PathVariable String code){
+		return examService.getExamByCode(code);
+	}
+	
 	@GetMapping("/getquestions/{sid}")
 	public  Exam get(@PathVariable Long sid)
 	{
@@ -73,10 +78,10 @@ public class ExamController {
 		examService.deletebyid(id);
 		return HttpStatus.OK;
 	}
-	@DeleteMapping("/deleteExamWithPaper/{eid}/{pid}")
-	public HttpStatus deleteexamwithpaper(@PathVariable Long eid,@PathVariable Long pid) {
-		examService.deleteexamwithpaper(eid,pid);
-		return HttpStatus.OK;
-	}
+//	@DeleteMapping("/deleteExamWithPaper/{eid}/{pid}")
+//	public HttpStatus deleteexamwithpaper(@PathVariable Long eid,@PathVariable Long pid) {
+//		examService.deleteexamwithpaper(eid,pid);
+//		return HttpStatus.OK;
+//	}
 	
 }

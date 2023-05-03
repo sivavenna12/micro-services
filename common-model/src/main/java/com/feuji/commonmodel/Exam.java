@@ -15,11 +15,16 @@ public class Exam {
 
     private String name;
 
+    @Column(name = "exam_code",unique = true)
     private String code;
 
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
+    
+    private int examDuration;
+    
+    private String status; 
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "paper_id")
@@ -29,7 +34,7 @@ public class Exam {
 //    @OneToOne(mappedBy = "exam", cascade = CascadeType.ALL)
 //    private Marks marks;
     
-    private int examDuration;
+   
     public Exam() {
     }
 
@@ -43,6 +48,13 @@ public class Exam {
         this.examDuration=examDuration;
     }
     
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
     public int getExamDuration() {
 		return examDuration;

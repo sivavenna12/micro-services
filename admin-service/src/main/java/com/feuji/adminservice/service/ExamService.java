@@ -31,7 +31,8 @@ public class ExamService {
 	{
 		CreatePaper createPaper= createPaperRepository.findById(id).get();
 		exam.setCreatePaper(createPaper);
-	
+		exam.setStatus("active");
+		
 		examRepository.save(exam);
 	}
 	
@@ -41,7 +42,7 @@ public class ExamService {
 	}
 	public List<Exam> getAll()
 	{
-		return  examRepository.findAll();
+		return  examRepository.findByStatus("active");
 	}
 	public void updateExam(Exam exam,Long id) {
 		Exam exam1 = examRepository.findById(id).get();
@@ -59,26 +60,28 @@ public class ExamService {
 		Exam exam=examRepository.findByCode(code);
 		
 		Set<Subject> set=new HashSet<>();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet()));
 		return set;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Set getQuestionsBySubjectId(Long sid,String code){
 		Exam exam=examRepository.findByCode(code);
 		
 		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid && q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid && q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
 		
 		return 	set;
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Set getAllQuestionsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
 		
 		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions());
-		set.addAll(exam.getCreatePaper().getCodingQuestions());
+		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
 		return 	set;
 	}
 
@@ -91,15 +94,20 @@ public class ExamService {
 	public void deletebyid(Long id)
 	{
 		Exam exam=examRepository.findById(id).get();
-		exam.setCreatePaper(null);
-		examRepository.deleteById(id);
+		exam.setStatus("inactive");
+		examRepository.saveAndFlush(exam);
 	}
-	public void deleteexamwithpaper(Long eid,Long pid)
-	{
-		Exam exam=examRepository.findById(eid).get();
-		exam.setCreatePaper(null);
-		examRepository.deleteById(eid);
-		createPaperRepository.deleteById(pid);
+//	public void deleteexamwithpaper(Long eid,Long pid)
+//	{
+//		Exam exam=examRepository.findById(eid).get();
+//		exam.setCreatePaper(null);
+//		examRepository.deleteById(eid);
+//		createPaperRepository.deleteById(pid);
+//	}
+
+	public Exam getExamByCode(String code) {
+		
+		return examRepository.findByCode(code);
 	}
 
 

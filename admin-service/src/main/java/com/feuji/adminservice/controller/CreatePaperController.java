@@ -50,7 +50,6 @@ public class CreatePaperController
 	@GetMapping("/subjectsbypaper/{pId}")
 	public Set<Subject> getSubjectsByPaperId(@PathVariable Long pId)
 	{
-		
 		return createPaperService.getSubjectsByPaperId(pId);
 	}
 

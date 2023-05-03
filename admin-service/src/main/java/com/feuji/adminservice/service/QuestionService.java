@@ -20,11 +20,12 @@ public class QuestionService {
 	public Question addquestion(Question question, Long id) {
 		Subject subject = subjectRepository.findById(id).get();
 		question.setSubject(subject);
+		question.setStatus("active");
 		return questionRepository.save(question);
 	}
 
 	public Set<Question> getAllQuestions(Long id) {
-		Set<Question> set = questionRepository.findBySubjectId(id);
+		Set<Question> set = questionRepository.findBySubjectIdAndStatus(id,"active");
 		return set;
 	}
 
@@ -46,7 +47,10 @@ public class QuestionService {
 	}
 	public void deleteQuestionById(Long id) {
 
-		 questionRepository.deleteById(id);;
+		Question question = questionRepository.findById(id).get();
+		question.setStatus("inactive");
+
+		 questionRepository.saveAndFlush(question);
 	}
 
 }
