@@ -60,8 +60,8 @@ public class ExamService {
 		Exam exam=examRepository.findByCode(code);
 		
 		Set<Subject> set=new HashSet<>();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
 		return set;
 	}
 
@@ -70,8 +70,8 @@ public class ExamService {
 		Exam exam=examRepository.findByCode(code);
 		
 		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid && q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid && q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid ).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
 		
 		return 	set;
 	}
@@ -80,8 +80,8 @@ public class ExamService {
 		Exam exam=examRepository.findByCode(code);
 		
 		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).collect(Collectors.toSet()));
+		set.addAll(exam.getCreatePaper().getQuestions());
+		set.addAll(exam.getCreatePaper().getCodingQuestions());
 		return 	set;
 	}
 

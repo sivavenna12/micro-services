@@ -21,7 +21,7 @@ public class SubjectController {
 	public HttpStatus addSubject(@RequestBody Subject subject)
 	{
 		subjectService.addSubject(subject);
-		System.out.println(subject.getName()+"  "+subject.getDescription());
+		
 		return HttpStatus.OK;
 	}
 
@@ -38,7 +38,6 @@ public class SubjectController {
 	{
 		List<Subject> list=subjectService.getAll();
 		
-		list.stream().forEach((s)->System.out.println(s.getId()+"============"));
 		return list;
 	}
 	@GetMapping("/getSubjectById/{id}")

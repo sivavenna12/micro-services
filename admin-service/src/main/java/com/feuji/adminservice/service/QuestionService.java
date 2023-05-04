@@ -25,7 +25,7 @@ public class QuestionService {
 	}
 
 	public Set<Question> getAllQuestions(Long id) {
-		Set<Question> set = questionRepository.findBySubjectIdAndStatus(id,"active");
+		Set<Question> set = questionRepository.findBySubjectId(id);
 		return set;
 	}
 

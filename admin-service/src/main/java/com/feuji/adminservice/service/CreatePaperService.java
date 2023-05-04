@@ -82,16 +82,17 @@ public class CreatePaperService
 	{
 		CreatePaper paper= createPaperRepository.findById(pid).get();
 		Set<Subject> set=new HashSet<>();
-		set.addAll(paper.getQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(paper.getCodingQuestions().stream().filter((q)->q.getStatus().equalsIgnoreCase("active")).map((s)->s.getSubject()).collect(Collectors.toSet()));
+		set.addAll(paper.getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
+		set.addAll(paper.getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
 		return set;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Set getPaperById(CreatePaper createPaper) {
 		Set set=new HashSet<>();
 		CreatePaper paper= createPaperRepository.findById(createPaper.getId()).get();
-		paper.getQuestions().stream().map((q)->q.getSubject()).filter((q)->q.getStatus().equalsIgnoreCase("active")).forEach(e->set.add(e));
-		paper.getCodingQuestions().stream().map((q)->q.getSubject()).filter((q)->q.getStatus().equalsIgnoreCase("active")).forEach(e->set.add(e));
+		paper.getQuestions().stream().forEach(e->set.add(e));
+		paper.getCodingQuestions().stream().forEach(e->set.add(e));
 		return set;
 	}
 	

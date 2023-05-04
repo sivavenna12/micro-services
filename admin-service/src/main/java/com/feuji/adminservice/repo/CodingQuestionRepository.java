@@ -13,4 +13,6 @@ public interface CodingQuestionRepository extends JpaRepository<CodingQuestion, 
 	public  List<CodingQuestion> findBySubjectId(Long subjectId);
 	
 	public List<CodingQuestion> findByStatus(String status);
+
+	
 }

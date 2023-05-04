@@ -44,9 +44,9 @@ private RestTemplate restTemplate;
 		Exam exam=examRepository.findById(eid).get();
 		Question question=questionRepository.findById(qid).get();
 		User user=restTemplate.getForObject("/getUserById/{uid}",User.class,uid);
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+       
         UserAnswers answers=userAnswersRepository.findByUserAndExamAndQuestion(user, exam, question);
-        System.out.println("================");
+   
         if(answers!=null)
         {
         	 answers.setUserAnswer(userAnswers.getUserAnswer());

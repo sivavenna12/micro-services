@@ -9,4 +9,6 @@ import com.feuji.commonmodel.TestCases;
 public interface TestCasesRepository extends JpaRepository<TestCases, Long>{
 
 	List<TestCases> findByCodingQuestionId(Long codingQuestionId);
+
+	
 }

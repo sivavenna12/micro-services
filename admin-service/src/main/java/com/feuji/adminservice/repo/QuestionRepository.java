@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface QuestionRepository extends JpaRepository<Question, Long>{
 
-	public  Set<Question> findBySubjectIdAndStatus(Long subjectId,String status);
-	
-	
-	/* public Set<Question> findByExamId(Long examId); */
+	public  Set<Question> findBySubjectId(Long subjectId);
+
 	
 }

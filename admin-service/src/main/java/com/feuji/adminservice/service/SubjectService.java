@@ -16,7 +16,7 @@ public class SubjectService {
 	
 	public void addSubject(Subject subject)
 	{
-		System.out.println(subject.getName()+"  "+subject.getDescription());
+		
 		subject.setStatus("active");
 
 		subjectRepository.save(subject);
