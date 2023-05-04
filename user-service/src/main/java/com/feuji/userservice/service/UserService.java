@@ -70,6 +70,22 @@ public class UserService {
 	}
 
 
+    public User updateUser(User user) {
+		System.out.println(user.getId());
+		User user2= userRepository.findById(user.getId()).get();
+		if(user2!=null)
+		{
+			user2.setName(user.getName());
+			user2.setEmail(user.getEmail());
+			user2.setPhoneNumber(user.getPhoneNumber());
+			return userRepository.saveAndFlush(user2);
+		}
+		else {
+			   return user;
+		}
+	}
+
+
 	public List<User> fetchAllUsers() {
 		List<User> users = userRepository.findAll().stream().filter(e->e.getRole().equals(Role.USER))
 				.collect(Collectors.toList());
