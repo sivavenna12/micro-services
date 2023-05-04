@@ -47,6 +47,8 @@ public class ExamController {
 	{
 		return  examService.getbySid(sid);
 	}
+
+
 	@PostMapping("/getsubjectsBycode/{code}")
 	public Set<Subject> getSubjectsByCode(@PathVariable String code){
 		System.out.println(code);

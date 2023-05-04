@@ -21,7 +21,6 @@ public class MarksService
 
 	public List<Marks> getMarks()
 	{
-		
 		return marksRepository.findAll();
 	}
 

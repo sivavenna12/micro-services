@@ -50,9 +50,9 @@ public class UserController {
 		return userService.getUser(user);	
 	}
 	
-	@GetMapping(value = "/getUsers")
-	public List<User> getUsers() {
-		return userService.getUsers();	
+	@GetMapping(value = "/getallusers")
+	public List<User> fetchAllUsers(){
+		return userService.fetchAllUsers();
 	}
 
 }
