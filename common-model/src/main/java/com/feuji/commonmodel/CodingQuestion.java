@@ -1,5 +1,8 @@
 package com.feuji.commonmodel;
 
+import java.io.Serializable;
+import java.sql.Blob;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +15,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Coding_Questions")
-public class CodingQuestion 
+public class CodingQuestion implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1767910721113575660L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

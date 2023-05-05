@@ -53,7 +53,7 @@ public class UserController {
 	@PostMapping(value = "/updateUser")
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);	
-	
+	}
 	@GetMapping(value = "/getallusers")
 	public List<User> fetchAllUsers(){
 		return userService.fetchAllUsers();
