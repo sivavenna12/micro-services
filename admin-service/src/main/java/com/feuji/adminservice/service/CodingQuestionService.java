@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.feuji.adminservice.repo.CodingQuestionRepository;
 import com.feuji.adminservice.repo.SubjectRepository;
 import com.feuji.commonmodel.CodingQuestion;
+import com.feuji.commonmodel.Question;
 import com.feuji.commonmodel.Subject;
 
 @Service
@@ -36,5 +37,11 @@ public class CodingQuestionService
 		List<CodingQuestion> set =  codingQuestionRepository.findBySubjectId(sid);
 		return set;
 	}
+	public void deleteQuestionById(Long id) {
 
+		CodingQuestion question = codingQuestionRepository.findById(id).get();
+		question.setStatus("inactive");
+
+		codingQuestionRepository.saveAndFlush(question);
+	}
 }

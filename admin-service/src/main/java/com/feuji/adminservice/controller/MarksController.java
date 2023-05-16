@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,10 @@ public class MarksController {
 	public List<Marks> getMarks()
 	{
 		return marksService.getMarks();
+	}
+	
+	@GetMapping("/examstatus/{examId}/user/{userId}")
+	public boolean isUserWrittenExam(@PathVariable("userId") Long userId, @PathVariable("examId") Long examId) {
+		return marksService.isUserWrittenExam(userId,examId);	
 	}
 }

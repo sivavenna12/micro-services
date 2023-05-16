@@ -9,19 +9,26 @@ import com.feuji.adminservice.repo.MarksRepository;
 import com.feuji.commonmodel.Marks;
 
 @Service
-public class MarksService 
-{
+public class MarksService {
 	@Autowired
 	private MarksRepository marksRepository;
-	
-	public void addMarks(Marks marks)
-	{
+
+	public void addMarks(Marks marks) {
 		marksRepository.save(marks);
 	}
 
-	public List<Marks> getMarks()
-	{
+	public List<Marks> getMarks() {
 		return marksRepository.findAll();
+	}
+
+	public boolean isUserWrittenExam(Long userId, Long examId) {
+
+		Marks marks = marksRepository.findByUserIdAndExamId(userId, examId);
+		if (marks == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
