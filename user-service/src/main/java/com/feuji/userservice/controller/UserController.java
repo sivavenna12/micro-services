@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping(value = "/"
+	@PostMapping(value = "/registerUser"
 			+ "")
 	public User registerUser(@RequestBody User user) {
 		 if(user.getRole()==null) {

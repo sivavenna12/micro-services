@@ -74,12 +74,12 @@ public class UserCodeService
 		return list;
 	}
 	
-//	public List<UserAnswers> getUserAnswers(Long uid)
-//	{
-//		
-//		return userAnswersRepository.findAllByUserId(uid);
-//	}
-//	
+	public List<UserCode> getUserAnswers(Long uid,Long eid)
+	{
+		
+		return userCodeRepository.findByUserIdAndExamId(uid,eid);
+	}
+	
 //	public List<UserAnswers> getanswers(Long uid,Long eid)
 //	{
 //		

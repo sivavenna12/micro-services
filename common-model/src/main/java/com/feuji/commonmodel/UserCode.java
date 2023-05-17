@@ -53,13 +53,15 @@ public class UserCode implements Serializable{
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "question_id")
 	private CodingQuestion codingQuestion;
+	
+	private String iscorrect;
 
 	public UserCode() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserCode(int id, String language, byte[] code, User user, Exam exam, CodingQuestion codingQuestion) {
+	public UserCode(int id, String language, byte[] code, User user, Exam exam, CodingQuestion codingQuestion,String iscorrect) {
 		super();
 		this.id = id;
 		this.language = language;
@@ -67,9 +69,18 @@ public class UserCode implements Serializable{
 		this.user = user;
 		this.exam = exam;
 		this.codingQuestion = codingQuestion;
+		this.iscorrect=iscorrect;
 	}
 
 	
+	public String getIscorrect() {
+		return iscorrect;
+	}
+
+	public void setIscorrect(String iscorrect) {
+		this.iscorrect = iscorrect;
+	}
+
 	public String getUserInputCode() {
 		return userInputCode;
 	}
