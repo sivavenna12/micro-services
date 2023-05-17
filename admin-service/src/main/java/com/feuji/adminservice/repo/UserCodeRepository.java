@@ -17,4 +17,6 @@ public interface UserCodeRepository extends JpaRepository<UserCode, Long>{
 
 	List<UserCode> findAllByUserIdAndExamId(Long uid,Long eid);
 
+//	List<UserCode> findByUserIdAndExamIdAndcodingQuestionId(Long userId, Long examId, Long codingQuestionId);
+	 List<UserCode> findByUserIdAndExamId(Long userId, Long examId);
 }

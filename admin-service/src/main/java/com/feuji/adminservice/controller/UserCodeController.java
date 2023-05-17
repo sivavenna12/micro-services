@@ -25,7 +25,7 @@ public class UserCodeController {
 	@PostMapping("/savecode")
 	public HttpStatus addPaper(@RequestBody UserCode userCode)
 	{
-
+        System.out.println(userCode.getIscorrect());
 		String codeValue=userCode.getUserInputCode();
 		userCode.setCode(codeValue.getBytes());
 		Long eid=userCode.getExam().getId();
@@ -42,11 +42,11 @@ public class UserCodeController {
 		return userCodeService.getAnswers();
 	}
 	
-//	@GetMapping("/getanswers/{uid}")
-//	public List<UserAnswers> getUserAnswers(@PathVariable Long uid)
-//	{
-//		return userAnswersService.getUserAnswers(uid);
-//	}
+	@GetMapping("/getusercodes/{uid}/{eid}")
+	public List<UserCode> getUserAnswers(@PathVariable Long uid,@PathVariable Long eid)
+	{
+		return userCodeService.getUserAnswers(uid,eid);
+	}
 //	
 //	@GetMapping("/getUserAnswers/{uid}/{eid}")
 //	public List<UserAnswers> getanswers(@PathVariable Long uid,@PathVariable Long eid)
