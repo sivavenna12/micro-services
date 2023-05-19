@@ -38,4 +38,10 @@ public class MarksController {
 	public boolean isUserWrittenExam(@PathVariable("userId") Long userId, @PathVariable("examId") Long examId) {
 		return marksService.isUserWrittenExam(userId,examId);	
 	}
+
+	@GetMapping("/getmarks/{userid}")
+	public  List<Marks> getMarksByUserId(@PathVariable("userid") Long userId)
+	{
+		return marksService.getMarksByUserId(userId);
+	}
 }

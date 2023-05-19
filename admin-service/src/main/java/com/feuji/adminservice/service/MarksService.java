@@ -30,5 +30,9 @@ public class MarksService {
 			return true;
 		}
 	}
+	
+	public  List<Marks> getMarksByUserId(Long userId) {
+		return marksRepository.findByUserId(userId);
+	}
 
 }

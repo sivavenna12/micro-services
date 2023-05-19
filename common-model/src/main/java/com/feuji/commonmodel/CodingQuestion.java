@@ -1,22 +1,20 @@
 package com.feuji.commonmodel;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Coding_Questions")
-public class CodingQuestion implements Serializable
-{
+public class CodingQuestion implements Serializable {
 	/**
 	 * 
 	 */
@@ -25,12 +23,12 @@ public class CodingQuestion implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "content",nullable = false)
+
+	@Column(name = "content", nullable = false)
 	private String content;
-	
+
 	private String status;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "subject_Id", nullable = false)
 	private Subject subject;
@@ -46,7 +44,7 @@ public class CodingQuestion implements Serializable
 		this.content = content;
 		this.subject = subject;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -78,6 +76,5 @@ public class CodingQuestion implements Serializable
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
-	
-	
+
 }

@@ -1,27 +1,21 @@
 package com.feuji.commonmodel;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
-import org.springframework.core.serializer.Serializer;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user_code")
-public class UserCode implements Serializable{
-	
-	
+public class UserCode implements Serializable {
 
 	/**
 	 * 
@@ -31,37 +25,37 @@ public class UserCode implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String language;
-	
+
 	// @JsonDeserialize(using = BlobDeserializer.class)
-	//private Blob code;
+	// private Blob code;
 	@Lob
 	private byte[] code;
-	
+
 	@Transient
 	private String userInputCode;
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "exam_id")
 	private Exam exam;
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "question_id")
 	private CodingQuestion codingQuestion;
-	
+
 	private String iscorrect;
 
 	public UserCode() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public UserCode(int id, String language, byte[] code, User user, Exam exam, CodingQuestion codingQuestion,String iscorrect) {
+	public UserCode(int id, String language, byte[] code, User user, Exam exam, CodingQuestion codingQuestion,
+			String iscorrect) {
 		super();
 		this.id = id;
 		this.language = language;
@@ -69,10 +63,9 @@ public class UserCode implements Serializable{
 		this.user = user;
 		this.exam = exam;
 		this.codingQuestion = codingQuestion;
-		this.iscorrect=iscorrect;
+		this.iscorrect = iscorrect;
 	}
 
-	
 	public String getIscorrect() {
 		return iscorrect;
 	}
@@ -105,9 +98,6 @@ public class UserCode implements Serializable{
 		this.language = language;
 	}
 
-	
-
-	
 	public User getUser() {
 		return user;
 	}
@@ -139,6 +129,5 @@ public class UserCode implements Serializable{
 	public void setCode(byte[] code) {
 		this.code = code;
 	}
-	
-	
+
 }

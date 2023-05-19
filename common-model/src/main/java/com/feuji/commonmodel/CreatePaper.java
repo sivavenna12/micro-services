@@ -1,12 +1,19 @@
 package com.feuji.commonmodel;
 
-import jakarta.persistence.*;
-
-import java.sql.Blob;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "create_paper")
@@ -20,30 +27,26 @@ public class CreatePaper {
 	private int totalMarks;
 
 	private int numberOfQuestions;
-	
+
 	private String status;
 
 	@Transient
 	private Long[] questionsListArray;
-	
+
 	@Transient
 	private Long[] codingQuestionsListArray;
-	
-	
- 	@JsonIgnore
-	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(name = "exams_questions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
 	private Set<Question> questions;
 
- 	@JsonIgnore
-	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(name = "paper_codingQuestions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "codingQuestion_id"))
 	private Set<CodingQuestion> codingQuestions;
- 	
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "createPaper")
-//	private Exam exam;
- 	
- 	public String getStatus() {
+
+	public String getStatus() {
 		return status;
 	}
 
@@ -76,21 +79,13 @@ public class CreatePaper {
 	}
 
 	public Set<Question> getQuestions() {
-	
+
 		return questions;
 	}
 
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
 	}
-
-//	public Exam getExam() {
-//		return exam;
-//	}
-//
-//	public void setExam(Exam exam) {
-//		this.exam = exam;
-//	}
 
 	public int getNumberOfQuestions() {
 		return numberOfQuestions;
@@ -123,7 +118,5 @@ public class CreatePaper {
 	public void setCodingQuestions(Set<CodingQuestion> codingQuestions) {
 		this.codingQuestions = codingQuestions;
 	}
-	
-	
 
 }
