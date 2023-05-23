@@ -22,7 +22,7 @@ public class CodingQuestionsController {
 	@Autowired
 	private CodingQuestionService codingQuestionService;
 	
-	@PostMapping("/addcodingquestion/{sid}")
+	@PostMapping("subject/{sid}/codingquestion")
 	public HttpStatus insertQuestion(@RequestBody CodingQuestion codingQuestion, @PathVariable Long sid) {
 		codingQuestionService.addquestion(codingQuestion,sid);
 		return HttpStatus.OK;
@@ -35,11 +35,12 @@ public class CodingQuestionsController {
 		return codingQuestionService.getAllQuestions();
 	}
 	
-	@GetMapping("/getallcodingquestions/{sid}")
+	@GetMapping("subject/{sid}/codingquestions")
 	public List<CodingQuestion> getAllCodingQuestions(@PathVariable Long sid)
 	{
 		return codingQuestionService.getAllCodingQuestions(sid);
 	}
+	
 	@DeleteMapping("/deleteCodingQuestion/{id}")
 	public HttpStatus deleteQuestion(@PathVariable Long id) {
 		codingQuestionService.deleteQuestionById(id);

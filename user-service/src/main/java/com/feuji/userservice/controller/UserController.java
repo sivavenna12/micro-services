@@ -36,6 +36,7 @@ public class UserController {
 	public User loginUser(@RequestBody User user) {
 		return userService.userLogin(user);
 	}
+	
 	@PutMapping(value="/forgotpassword")
 	public void forgotPassword(@RequestBody User user ) {
 			

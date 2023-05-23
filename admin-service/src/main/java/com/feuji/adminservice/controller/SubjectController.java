@@ -17,7 +17,7 @@ public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 	
-	@PostMapping("/addsubject")
+	@PostMapping("/subject")
 	public HttpStatus addSubject(@RequestBody Subject subject)
 	{
 		subjectService.addSubject(subject);
@@ -25,7 +25,7 @@ public class SubjectController {
 		return HttpStatus.OK;
 	}
 
-	@PutMapping("/updatesubject/{id}")
+	@PutMapping("/subject/{id}")
 	public HttpStatus updateSubject( @PathVariable Long id, @RequestBody Subject subject)
 	{
 		subjectService.updateSubject(subject, id);
@@ -33,18 +33,20 @@ public class SubjectController {
 		return HttpStatus.OK;
 	}
 	
-	@GetMapping("/getAllSubjects")
+	@GetMapping("/subjects")
 	public List<Subject> getAll()
 	{
 		List<Subject> list=subjectService.getAll();
 		
 		return list;
 	}
-	@GetMapping("/getSubjectById/{id}")
+
+	@GetMapping("/subject/{id}")
 	public Subject getSubjectById(@PathVariable Long id) {
 		return subjectService.getSubjectById(id);
 	}
-	@DeleteMapping("/deleteSubject/{id}")
+
+	@DeleteMapping("/subject/{id}")
 	public HttpStatus deleteSubject(@PathVariable Long id) {
 		 subjectService.deleteSubject(id);;
 		return HttpStatus.OK;
