@@ -34,6 +34,8 @@ public class Exam {
 
 	private String status;
 
+	private boolean showResults;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paper_id")
 	private CreatePaper createPaper;
@@ -115,11 +117,11 @@ public class Exam {
 		this.createPaper = createPaper;
 	}
 
-//    public Marks getMarks() {
-//        return marks;
-//    }
-//
-//    public void setMarks(Marks marks) {
-//        this.marks = marks;
-//    }
+	public boolean getShowResults() {
+		return showResults;
+	}
+
+	public void setShowResults(boolean showResults) {
+		this.showResults = showResults;
+	}
 }
