@@ -26,6 +26,9 @@ public class UserAnswersService {
 	@Autowired
 	private  QuestionRepository questionRepository;
 	
+	@Autowired
+	private UserExamDetailsService detailsService;
+	
 private RestTemplate restTemplate;
 
 	
@@ -46,7 +49,8 @@ private RestTemplate restTemplate;
 		User user=restTemplate.getForObject("/getUserById/{uid}",User.class,uid);
        
         UserAnswers answers=userAnswersRepository.findByUserAndExamAndQuestion(user, exam, question);
-   
+        detailsService.send(user,exam);
+        System.out.println(exam.getExamDuration());
         if(answers!=null)
         {
         	 answers.setUserAnswer(userAnswers.getUserAnswer());

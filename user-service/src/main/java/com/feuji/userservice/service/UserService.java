@@ -92,4 +92,9 @@ public class UserService {
 		return users;
 	}
 
+	 public void setUserRepository(UserRepository userRepository) {
+	        this.userRepository = userRepository;
+	    }
+
+
 }
