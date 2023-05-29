@@ -52,6 +52,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>-->
+		<finalName>common-model</finalName>
 	</build>
 
 </project>

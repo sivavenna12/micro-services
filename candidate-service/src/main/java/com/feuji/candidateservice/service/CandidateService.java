@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.feuji.candidateservice.repo.CandidateRepository;
+import com.feuji.candidateservice.utils.Candidateutil;
 import com.feuji.commonmodel.User;
 import com.feuji.commonmodel.UserAnswers;
 
@@ -19,12 +20,19 @@ public class CandidateService {
 	private   CandidateRepository candidateRepository;
 
 	public String correctAnswer;
+	
 
 	private RestTemplate restTemplate;
 	
-	public CandidateService(@Value("${admin.url}") String adminUrl ,RestTemplateBuilder builder) 
+//	@Autowired
+	private Candidateutil candidateutil;
+	
+	public CandidateService(@Value("${admin.url}") String adminUrl ,RestTemplateBuilder builder,Candidateutil candidateutil) 
 	{
-		this.restTemplate = builder.rootUri(adminUrl).build();
+		this.candidateutil=candidateutil;
+		String url=candidateutil.getUrl(adminUrl);
+		System.err.println(url);
+		this.restTemplate = builder.rootUri(url).build();
 	}
 	
 	

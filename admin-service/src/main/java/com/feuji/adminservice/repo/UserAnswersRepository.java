@@ -1,8 +1,11 @@
 package com.feuji.adminservice.repo;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.feuji.commonmodel.Exam;
 import com.feuji.commonmodel.Question;
@@ -17,5 +20,7 @@ List<UserAnswers> findAllByUserId(Long userId);
 
 List<UserAnswers> findAllByUserIdAndExamId(Long uid,Long eid);
 
+@Query(value="select question_id, user_answer from user_answers where user_id=:uid and exam_id=:eid", nativeQuery = true)
+List<Map<Long,String>> findanswerbyqid(long uid, long eid); 
 
 }

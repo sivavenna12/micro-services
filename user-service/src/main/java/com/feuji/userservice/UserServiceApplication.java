@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.feuji.commonmodel")
+
 public class UserServiceApplication {
 
 	public static void main(String[] args) {
