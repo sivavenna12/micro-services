@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.feuji.adminservice.repo.MarksRepository;
+import com.feuji.commonmodel.Exam;
 import com.feuji.commonmodel.Marks;
 
 @Service
@@ -14,9 +15,13 @@ public class MarksService {
 	private MarksRepository marksRepository;
 
 	public void addMarks(Marks marks) {
-		marksRepository.save(marks);
+		Marks existingMarks = marksRepository.findByUserIdAndExamId(marks.getUser().getId(), marks.getExam().getId());
+		if(existingMarks == null) {
+			marksRepository.save(marks);
+		}
 	}
 
+	
 	public List<Marks> getMarks() {
 		return marksRepository.findAll();
 	}
