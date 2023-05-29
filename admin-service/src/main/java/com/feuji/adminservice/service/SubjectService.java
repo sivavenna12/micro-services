@@ -42,7 +42,9 @@ public class SubjectService {
 		subjectRepository.saveAndFlush(subject1);
 		
 	}
-	
+	public Subject findSubjectByName(String name,String topicName) {
+		return subjectRepository.findSubjectByNameAndDescription(name,topicName);
+	}
 	
 
 }
