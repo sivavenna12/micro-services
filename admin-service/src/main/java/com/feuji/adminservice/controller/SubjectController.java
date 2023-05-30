@@ -18,11 +18,15 @@ public class SubjectController {
 	private SubjectService subjectService;
 	
 	@PostMapping("/subject")
-	public HttpStatus addSubject(@RequestBody Subject subject)
+	public ResponseEntity<String> addSubject(@RequestBody Subject subject)
 	{
-		subjectService.addSubject(subject);
+		boolean check=subjectService.addSubject(subject);
+		if(check) {
+			return ResponseEntity.ok("");
+		}
 		
-		return HttpStatus.OK;
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	            .body("");
 	}
 
 	@PutMapping("/subject/{id}")

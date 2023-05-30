@@ -14,12 +14,17 @@ public class SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
 	
-	public void addSubject(Subject subject)
+	public boolean addSubject(Subject subject)
 	{
-		
+		Subject subject1=subjectRepository.findSubjectByNameAndDescription(subject.getName(), subject.getDescription());
 		subject.setStatus("active");
 
-		subjectRepository.save(subject);
+		if(subject1==null) {
+			subjectRepository.save(subject);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public List<Subject> getAll() {
