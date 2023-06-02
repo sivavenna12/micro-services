@@ -15,5 +15,5 @@
 # Docker Build Maven Stage
 FROM adoptopenjdk/openjdk11
 VOLUME /tmp
-ADD target/candidate-service.jar candidate-service.jar
-ENTRYPOINT ["java","-jar","/candidate-service.jar"]
+ADD target/cadidate-service.jar cadidate-service.jar
+ENTRYPOINT ["java","-jar","/cadidate-service.jar"]
