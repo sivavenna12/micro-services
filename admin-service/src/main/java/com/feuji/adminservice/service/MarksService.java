@@ -23,7 +23,7 @@ public class MarksService {
 	public void addMarks(Marks marks) {
 		Marks existingMarks = marksRepository.findByUserIdAndExamId(marks.getUser().getId(), marks.getExam().getId());
 		if(existingMarks == null) {
-			Exam exam=examRepository.findById(marks.getId()).get();
+			Exam exam=examRepository.findById(marks.getExam().getId()).get();
 			marks.setTotalMarks(exam.getCreatePaper().getTotalMarks());
 			marksRepository.save(marks);
 		}
