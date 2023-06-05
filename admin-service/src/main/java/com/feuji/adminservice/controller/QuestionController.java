@@ -70,40 +70,58 @@ public class QuestionController {
 		return HttpStatus.OK;
 	}
 
-	@PostMapping("/questions/upload")
-	public ResponseEntity<String> uploadExcel(@RequestParam("file") MultipartFile file, HttpServletResponse response)
-			throws IOException {
-		if (excelHelper.checkExcelFormat(file)) {
-			try {
-
-				questionService.excelSave(file);
-				exportToExcel(response);
-				return ResponseEntity.ok().body("File uploaded and questions saved ");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			return ResponseEntity.ok().body("please upload excel file only");
+	 @PostMapping("/questions/upload")
+		public ResponseEntity<String> uploadExcel(@RequestParam("file") MultipartFile file,HttpServletResponse response) throws IOException
+		{
+			 if(excelHelper.checkExcelFormat(file))
+			 {
+				 try {
+				 
+				 questionService.excelSave(file);
+				 exportToExcel(response);
+				 return ResponseEntity.ok().body("File uploaded and questions saved ");
+				 }
+				 catch(Exception e)
+				 {
+					e.printStackTrace();
+				 }
+			 }
+			 else
+			 {
+				 return ResponseEntity.ok().body("please upload excel file only");
+			 }
+			
+			return ResponseEntity.badRequest().body("issue");
 		}
+	 
+	 public boolean exportToExcel(HttpServletResponse response) throws IOException {
+		 List<Question> listerrorQuestions = excelHelper.errorQuestions();
+		 if(listerrorQuestions.size()!=0) {
+		  response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+	        String currentDateTime = dateFormatter.format(new Date());
+	         
+	        String headerKey = "Content-Disposition";
+	        String headerValue = "attachment; filename=errors_" + currentDateTime + ".xlsx";
+	        System.out.println(headerValue);
+	        response.setHeader(headerKey, headerValue);          
+	        JavaToExcel excelExporter = new JavaToExcel(listerrorQuestions);
+	         
+	        excelExporter.export(response);
+	        excelHelper.errorQuestions.clear();
+	        return true;
+	        }
+	        else {
+	        	return false;
+	        }
+	       
+	       
+	    }  
+	 
+	 	
+	 
+	
+	
 
-		return ResponseEntity.ok("issue");
-	}
-
-	public void exportToExcel(HttpServletResponse response) throws IOException {
-		response.setContentType("application/octet-stream");
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-		String currentDateTime = dateFormatter.format(new Date());
-
-		String headerKey = "Content-Disposition";
-		String headerValue = "attachment; filename=errors_" + currentDateTime + ".xlsx";
-		response.setHeader(headerKey, headerValue);
-
-		List<Question> listerrorQuestions = excelHelper.errorQuestions();
-		JavaToExcel excelExporter = new JavaToExcel(listerrorQuestions);
-
-		excelExporter.export(response);
-		excelHelper.errorQuestions.clear();
-
-	}
 
 }
