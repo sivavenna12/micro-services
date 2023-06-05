@@ -33,8 +33,6 @@ public class CreatePaperController
 		createPaperService.addPaper(createPaper);
 		return HttpStatus.OK;
 	}
-	
-	
 	@GetMapping("/getpaper")
 	public List<CreatePaper> getPaper()
 	{
