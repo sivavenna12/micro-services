@@ -87,5 +87,9 @@ public class ExamController {
 //		examService.deleteexamwithpaper(eid,pid);
 //		return HttpStatus.OK;
 //	}
+	@GetMapping("/getexamsbyyear/{year}")
+	public List<Exam> getExamsbyyear(@PathVariable Long year) {
+		return examService.getExamsByYear(year);
+	}
 
 }

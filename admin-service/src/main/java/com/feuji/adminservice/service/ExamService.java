@@ -109,6 +109,11 @@ public class ExamService {
 		
 		return examRepository.findByCode(code);
 	}
-
+	
+	public List<Exam> getExamsByYear(Long year) {
+		List<Exam> exams= examRepository.findAll();
+		 return exams.stream().filter(e->e.getStartTime().toString().contains(year.toString())).toList();
+		 
+	}
 
 }

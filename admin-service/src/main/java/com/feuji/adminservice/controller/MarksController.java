@@ -44,4 +44,10 @@ public class MarksController {
 	{
 		return marksService.getMarksByUserId(userId);
 	}
+	
+	@GetMapping("/marks/{examid}")
+	public  List<Marks> getMarksById(@PathVariable("examid") Long examId)
+	{
+		return marksService.getMarksById(examId);
+	}
 }

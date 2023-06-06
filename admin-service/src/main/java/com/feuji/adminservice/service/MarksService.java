@@ -48,4 +48,10 @@ public class MarksService {
 		return marksRepository.findByUserId(userId);
 	}
 
+	public List<Marks> getMarksById(Long examId) {
+		// TODO Auto-generated method stub
+		return marksRepository.findByExamId(examId);
+	}
+	
+
 }
