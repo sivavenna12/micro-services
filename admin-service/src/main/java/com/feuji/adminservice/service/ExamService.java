@@ -112,7 +112,7 @@ public class ExamService {
 	
 	public List<Exam> getExamsByYear(Long year) {
 		List<Exam> exams= examRepository.findAll();
-		 return exams.stream().filter(e->e.getStartTime().toString().contains(year.toString())).toList();
+		 return exams.stream().filter(e->e.getStartTime().toString().contains(year.toString())).collect(Collectors.toList());
 		 
 	}
 
