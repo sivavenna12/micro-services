@@ -1,5 +1,6 @@
 package com.feuji.commonmodel;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,12 +40,12 @@ public class CreatePaper {
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(name = "exams_questions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
-	private Set<Question> questions;
+	private List<Question> questions;
 
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(name = "paper_codingQuestions", joinColumns = @JoinColumn(name = "paper_id"), inverseJoinColumns = @JoinColumn(name = "codingQuestion_id"))
-	private Set<CodingQuestion> codingQuestions;
+	private List<CodingQuestion> codingQuestions;
 
 	public String getStatus() {
 		return status;
@@ -78,12 +79,12 @@ public class CreatePaper {
 		this.totalMarks = totalMarks;
 	}
 
-	public Set<Question> getQuestions() {
+	public List<Question> getQuestions() {
 
 		return questions;
 	}
 
-	public void setQuestions(Set<Question> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
@@ -111,11 +112,11 @@ public class CreatePaper {
 		this.codingQuestionsListArray = codingQuestionsListArray;
 	}
 
-	public Set<CodingQuestion> getCodingQuestions() {
+	public List<CodingQuestion> getCodingQuestions() {
 		return codingQuestions;
 	}
 
-	public void setCodingQuestions(Set<CodingQuestion> codingQuestions) {
+	public void setCodingQuestions(List<CodingQuestion> codingQuestions) {
 		this.codingQuestions = codingQuestions;
 	}
 

@@ -52,21 +52,21 @@ public class ExamController {
 	}
 
 	@PostMapping("/getsubjectsBycode/{code}")
-	public Set<Subject> getSubjectsByCode(@PathVariable String code) {
+	public List<Subject> getSubjectsByCode(@PathVariable String code) {
 		System.out.println(code);
 		return examService.getSubjectsByCode(code);
 
 	}
 
 	@GetMapping("/getquestionsBySubjectId/{sid}/{code}")
-	public Set getQuestionsBySubjectId(@PathVariable Long sid, @PathVariable String code) {
+	public List getQuestionsBySubjectId(@PathVariable Long sid, @PathVariable String code) {
 		System.out.println(code);
 		return examService.getQuestionsBySubjectId(sid, code);
 
 	}
 
 	@GetMapping("/getquestionsBySubjectId/{code}")
-	public Set getAllQuestionsByCode(@PathVariable String code) {
+	public List getAllQuestionsByCode(@PathVariable String code) {
 		System.out.println(code);
 		return examService.getAllQuestionsByCode(code);
 

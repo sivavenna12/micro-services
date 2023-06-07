@@ -47,7 +47,7 @@ public class QuestionController {
 	}
 
 	@GetMapping("/getallquestions/{sid}")
-	public Set<Question> getAllQuestions(@PathVariable Long sid) {
+	public List<Question> getAllQuestions(@PathVariable Long sid) {
 
 		return questionService.getAllQuestions(sid);
 	}

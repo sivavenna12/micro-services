@@ -34,9 +34,9 @@ public class QuestionService {
 		return questionRepository.save(question);
 	}
 
-	public Set<Question> getAllQuestions(Long id) {
-		Set<Question> set = questionRepository.findBySubjectId(id);
-		return set;
+	public List<Question> getAllQuestions(Long id) {
+		List<Question> list = questionRepository.findBySubjectId(id);
+		return list;
 	}
 
 	public Question updatequestions(Question question) {

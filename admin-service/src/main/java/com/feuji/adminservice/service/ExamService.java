@@ -1,5 +1,6 @@
 package com.feuji.adminservice.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,33 +57,33 @@ public class ExamService {
 		examRepository.saveAndFlush(exam1);
 
 	}
-	public Set<Subject> getSubjectsByCode(String code){
+	public List<Subject> getSubjectsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
 		
-		Set<Subject> set=new HashSet<>();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
-		return set;
+		List<Subject> list=new ArrayList<>();
+		list.addAll(exam.getCreatePaper().getQuestions().stream().map((s)->s.getSubject()).distinct().collect(Collectors.toList())); 
+		list.addAll(exam.getCreatePaper().getCodingQuestions().stream().map((s)->s.getSubject()).distinct().collect(Collectors.toList()));
+		return list;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Set getQuestionsBySubjectId(Long sid,String code){
+	public List getQuestionsBySubjectId(Long sid,String code){
 		Exam exam=examRepository.findByCode(code);
 		
-		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid ).collect(Collectors.toSet()));
-		set.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toSet()));
+		List list=new ArrayList();
+		list.addAll(exam.getCreatePaper().getQuestions().stream().filter((q)->q.getSubject().getId()==sid ).collect(Collectors.toList()));
+		list.addAll(exam.getCreatePaper().getCodingQuestions().stream().filter((q)->q.getSubject().getId()==sid).collect(Collectors.toList()));
 		
-		return 	set;
+		return 	list;
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Set getAllQuestionsByCode(String code){
+	public List getAllQuestionsByCode(String code){
 		Exam exam=examRepository.findByCode(code);
 		
-		Set set=new HashSet();
-		set.addAll(exam.getCreatePaper().getQuestions());
-		set.addAll(exam.getCreatePaper().getCodingQuestions());
-		return 	set;
+		List list=new ArrayList();
+		list.addAll(exam.getCreatePaper().getQuestions());
+		list.addAll(exam.getCreatePaper().getCodingQuestions());
+		return 	list;
 	}
 
 	public Exam getExamById(Long id) 

@@ -46,13 +46,13 @@ public class CreatePaperController
 	}
 	
 	@GetMapping("/subjectsbypaper/{pId}")
-	public Set<Subject> getSubjectsByPaperId(@PathVariable Long pId)
+	public List<Subject> getSubjectsByPaperId(@PathVariable Long pId)
 	{
 		return createPaperService.getSubjectsByPaperId(pId);
 	}
 
 	@PostMapping("/questionsbypaper")
-	public Set getQuestionsByPaperId(@RequestBody CreatePaper createPaper) {
+	public List getQuestionsByPaperId(@RequestBody CreatePaper createPaper) {
 		
 		return createPaperService.getPaperById(createPaper);
 	}

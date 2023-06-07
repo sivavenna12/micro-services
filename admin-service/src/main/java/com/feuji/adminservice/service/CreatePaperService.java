@@ -1,5 +1,6 @@
 package com.feuji.adminservice.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -33,17 +34,17 @@ public class CreatePaperService
 	{
 		createPaper.setStatus("active");
 
-		Set<Question> questionsSet=new HashSet<>();
+		List<Question> questionsList=new ArrayList<>();
 		
-		Set<CodingQuestion> codingQuestionsSet=new HashSet<>();
+		List<CodingQuestion> codingQuestionsList=new ArrayList<>();
 
 		if(createPaper.getQuestionsListArray()!=null) {
 			
 			Arrays.asList(createPaper.getQuestionsListArray()).stream().forEach((id) -> {
 				Question question =questionRepository.findById(id).get();
-				questionsSet.add(question);
+				questionsList.add(question);
 			});
-			createPaper.setQuestions(questionsSet);
+			createPaper.setQuestions(questionsList);
 			
 		}
 		
@@ -51,9 +52,9 @@ public class CreatePaperService
 			
 			Arrays.asList(createPaper.getCodingQuestionsListArray()).stream().forEach((id) -> {
 				CodingQuestion codingQuestion =codingQuestionRepository.findById(id).get();
-				codingQuestionsSet.add(codingQuestion);
+				codingQuestionsList.add(codingQuestion);
 			});
-			createPaper.setCodingQuestions(codingQuestionsSet);
+			createPaper.setCodingQuestions(codingQuestionsList);
 		}
 		
 		createPaperRepository.save(createPaper);
@@ -78,22 +79,22 @@ public class CreatePaperService
 
 	}
 	
-	public Set<Subject> getSubjectsByPaperId(Long pid)
+	public List<Subject> getSubjectsByPaperId(Long pid)
 	{
 		CreatePaper paper= createPaperRepository.findById(pid).get();
-		Set<Subject> set=new HashSet<>();
-		set.addAll(paper.getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet())); 
-		set.addAll(paper.getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toSet()));
-		return set;
+		List<Subject> list=new ArrayList<>();
+		list.addAll(paper.getQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toList())); 
+		list.addAll(paper.getCodingQuestions().stream().map((s)->s.getSubject()).collect(Collectors.toList()));
+		return list;
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Set getPaperById(CreatePaper createPaper) {
-		Set set=new HashSet<>();
+	public List getPaperById(CreatePaper createPaper) {
+		List list=new ArrayList();
 		CreatePaper paper= createPaperRepository.findById(createPaper.getId()).get();
-		paper.getQuestions().stream().forEach(e->set.add(e));
-		paper.getCodingQuestions().stream().forEach(e->set.add(e));
-		return set;
+		paper.getQuestions().stream().forEach(e->list.add(e));
+		paper.getCodingQuestions().stream().forEach(e->list.add(e));
+		return list;
 	}
 	
 	public void deletebyid(Long id)
